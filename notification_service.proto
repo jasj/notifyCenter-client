@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package notificationservice;
+
+import "google/protobuf/struct.proto";
+
+service NotificationService {
+  rpc SendNotifications (NotificationRequest) returns (NotificationResponse) {}
+}
+
+message NotificationRequest {
+  repeated Notification notifications = 1;
+}
+
+message Notification {
+  repeated string to = 1;
+  string subject = 2;
+  string template = 3;
+  google.protobuf.Struct payload = 4;
+}
+
+message NotificationResponse {
+  bool success = 1;
+  string message = 2;
+}
